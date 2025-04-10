@@ -1,6 +1,8 @@
 import React, { useState, useMemo } from "react";
 import "./../styles/App.css";
-import Card from "./Card";
+import State from "./State";
+import City from "./City";
+import Landmark from "./Landmark";
 
 
 const states = [{
@@ -162,7 +164,7 @@ const App = () => {
 
 	return (
 		<div id="main">
-			<select id="state" onChange={(e) => setState(e.target.value)}>
+			<select id="state" onChange={(e) => setState(e.target.value)} >
 				<option>Select State</option>
 				{states.map((state, ind) => {
 					return (
@@ -170,7 +172,7 @@ const App = () => {
 					)
 				})}
 			</select>
-			<select id="city" onChange={(e) => setCity(e.target.value)}>
+			<select id="city" onChange={(e) => setCity(e.target.value)} >
 				<option>Select City</option>
 				{cities && cities.map((city, ind) => {
 					return (
@@ -178,7 +180,7 @@ const App = () => {
 					)
 				})}
 			</select>
-			<select id="landmark" onChange={(e) => setLandmark(e.target.value)}>
+			<select id="landmark" onChange={(e) => setLandmark(e.target.value)} >
 				<option>Select landmark</option>
 				{landmarks && landmarks.map((landmark, ind) => {
 					return (
@@ -186,7 +188,9 @@ const App = () => {
 					)
 				})}
 			</select>
-			{state && <Card name={state} description={states.find(item => item.name === state)?.description} />}
+			{state && <State name={state} description={states.find(item => item.name === state)?.description} />}
+			{city && <City name={city} description={cities.find(item => item.name === city)?.description} />}
+			{landmark && <Landmark name={landmark} description={landmarks.find(item => item.name === landmark)?.description} />}
 		</div>
 	)
 }

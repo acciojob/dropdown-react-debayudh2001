@@ -1,16 +1,16 @@
 import React from "react";
 
-const Card = ({ name, description }) => {
+const City = ({name, description}) => {
     return (
         <>
-            <div id="state-title">
+            <div id="city-title">
                 <p>{name}</p>
             </div>
-            <div id="state-description">
+            <div id="city-description">
                 <p>{description}</p>
             </div>
         </>
     )
 }
 
-export default Card
+export default City
