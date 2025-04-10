@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from "react";
 import "./../styles/App.css";
+import Card from "./Card";
 
 
 const states = [{
@@ -185,49 +186,7 @@ const App = () => {
 					)
 				})}
 			</select>
-			{state && (
-				<div>
-					<div id="state-name">
-						<p>
-							State: {state}
-						</p>
-					</div>
-
-					<div id="state-description">
-						<p>
-							Description: {states.find(item => item.name === state)?.description}
-						</p>
-					</div>
-				</div>
-			)}
-			{city && (
-				<div>
-					<div id="city-name">
-						<p>
-							City: {city}
-						</p>
-					</div>
-					<div id="city-description">
-						<p>
-							Description: {cities.find(item => item.name === city)?.description}
-						</p>
-					</div>
-				</div>
-			)}
-			{landmark && (
-				<div>
-					<div id="landmark-name">
-						<p>
-							Landmark: {landmark}
-						</p>
-					</div>
-					<div id="landmark-description">
-						<p>
-							Description: {landmarks.find(item => item.name === landmark)?.description}
-						</p>
-					</div>
-				</div>
-			)}
+			{state && <Card name={state} description={states.find(item => item.name === state)?.description} />}
 		</div>
 	)
 }
