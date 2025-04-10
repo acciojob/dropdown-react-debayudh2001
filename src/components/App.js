@@ -169,7 +169,7 @@ const App = () => {
 						<option key={ind} value={state.name}>{state.name}</option>
 					)
 				})}
-			</select>&nbsp;&nbsp;
+			</select>
 			<select id="city" onChange={(e) => setCity(e.target.value)}>
 				<option>Select City</option>
 				{cities && cities.map((city, ind) => {
@@ -177,7 +177,7 @@ const App = () => {
 						<option key={ind} value={city.name}>{city.name}</option>
 					)
 				})}
-			</select>&nbsp;&nbsp;
+			</select>
 			<select id="landmark" onChange={(e) => setLandmark(e.target.value)}>
 				<option>Select landmark</option>
 				{landmarks && landmarks.map((landmark, ind) => {
