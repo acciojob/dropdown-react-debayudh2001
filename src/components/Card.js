@@ -4,10 +4,10 @@ const Card = ({ name, description }) => {
     return (
         <>
             <div id="state-title">
-                <p><b>State</b>: {name}</p>
+                <p>{name}</p>
             </div>
             <div id="state-description">
-                <p><b>Description</b>: {description}</p>
+                <p>{description}</p>
             </div>
         </>
     )
