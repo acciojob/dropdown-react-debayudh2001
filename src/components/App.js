@@ -1,9 +1,8 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import "./../styles/App.css";
 import State from "./State";
 import City from "./City";
 import Landmark from "./Landmark";
-
 
 const states = [{
 	name: "Madhya Pradesh",
@@ -75,7 +74,7 @@ const states = [{
 	description: "Assam is a state in northeastern India known for its wildlife, archeological sites and tea plantations. ",
 	city: [{
 		name: "Guwhati",
-		description: "Guwahati is a sprawling city beside the Brahmaputra River in the northeast Indian state of Assam. It’s known for holy sites like the hilltop Kamakhya Temple,",
+		description: "Guwahati is a sprawling city beside the Brahmaputra River in the northeast Indian state of Assam. It\'s known for holy sites like the hilltop Kamakhya Temple,",
 		landmarks: [{
 			name: "Ganesh Guri",
 			description: "Famous because of PVR city center.",
@@ -119,7 +118,7 @@ const states = [{
 		}]
 	}, {
 		name: "Gaya",
-		description: "Gaya is a holy city beside the Falgu River, in the northeast Indian state of Bihar. It’s known for 18th-century Vishnupad Mandir, a riverside temple with an octagonal shrine. Close by, ancient Mangla Gauri Temple is set on a hilltop. ",
+		description: "Gaya is a holy city beside the Falgu River, in the northeast Indian state of Bihar. It\'s known for 18th-century Vishnupad Mandir, a riverside temple with an octagonal shrine. Close by, ancient Mangla Gauri Temple is set on a hilltop. ",
 		landmarks: [{
 			name: "Bakraur",
 			description: "Bakraur, sometimes called Bakrour, is a village located slightly east of Bodh Gaya in the state of Bihar, India. It lies directly across the Phalgu River from the landmark of Bodh Gaya, where Gautama Buddha is said to have attained enlightenment.",
@@ -145,26 +144,37 @@ const App = () => {
 	const [state, setState] = useState("")
 	const [city, setCity] = useState("")
 	const [landmark, setLandmark] = useState("")
-
-	let cities = useMemo(() => {
-		if (state) {
-			return states.find(item => item.name === state).city
-		}
+	const [cities, setCities] = useState([])
+	const [landmarks, setLandmarks] = useState([])
+    
+	useEffect(() => {
+		let arr = states.find(item => item.name === state)?.city
+		setCities(arr)
 	}, [state])
 
-	//console.log(cities)
-
-	let landmarks = useMemo(() => {
-		if (city) {
-			return cities.find(item => item.name === city).landmarks
-		}
+	useEffect(() => {
+		let brr = cities.find(item => item.name === city)?.landmarks
+		setLandmarks(brr)
 	}, [city])
-
-	//console.log(landmarks)
+    
+    function handleChange(e){
+		if(e.target.id === "state"){
+			setState(e.target.value)
+			setCity("")
+			setLandmark("")
+		}
+		if(e.target.id === "city"){
+			setCity(e.target.value)
+			setLandmark("")
+		}
+		if(e.target.id === "landmark"){
+			setLandmark(e.target.value)
+		}
+	}
 
 	return (
 		<div id="main">
-			<select id="state" onChange={(e) => setState(e.target.value)} >
+			<select id="state" onChange={handleChange} >
 				<option>Select State</option>
 				{states.map((state, ind) => {
 					return (
@@ -172,7 +182,7 @@ const App = () => {
 					)
 				})}
 			</select>
-			<select id="city" onChange={(e) => setCity(e.target.value)} >
+			<select id="city" onChange={handleChange} >
 				<option>Select City</option>
 				{cities && cities.map((city, ind) => {
 					return (
@@ -180,8 +190,8 @@ const App = () => {
 					)
 				})}
 			</select>
-			<select id="landmark" onChange={(e) => setLandmark(e.target.value)} >
-				<option>Select landmark</option>
+			<select id="landmark" onChange={handleChange} >
+				<option>Select Landmark</option>
 				{landmarks && landmarks.map((landmark, ind) => {
 					return (
 						<option key={ind} value={landmark.name}>{landmark.name}</option>
@@ -189,8 +199,8 @@ const App = () => {
 				})}
 			</select>
 			{state && <State name={state} description={states.find(item => item.name === state)?.description} />}
-			{city && <City name={city} description={cities.find(item => item.name === city)?.description} />}
-			{landmark && <Landmark name={landmark} description={landmarks.find(item => item.name === landmark)?.description} />}
+			{city && <City name={city} description={cities.find(item => item.name === city)?.description} /> }
+			{landmark && <Landmark name={landmark} description={landmarks.find(item => item.name === landmark)?.description} /> }
 		</div>
 	)
 }
