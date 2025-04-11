@@ -103,6 +103,40 @@ const states = [{
 			description: "Central Market for Tezpur",
 		}]
 	}]
+}, {
+	name: "Bihar",
+	description: "Bihar is a state in East India, bordering Nepal. It is divided by the River Ganges, which floods its fertile plains. Important Buddhist pilgrimage sites include the Bodhi Tree in Bodhgaya's Mahabodhi Temple, under which the Buddha allegedly meditated.",
+	city: [{
+		name: "Patna",
+		description: "Patna is an ancient city that sprawls along the south bank of the Ganges River in Bihar, northeast India.",
+		landmarks: [{
+			name: "Sonpur",
+			description: "Sonpur is a city and sub-division in the Indian state of Bihar, situated on the banks of the River Gandak and Ganges River in the Saran District.",
+		}, {
+			name: "Maner",
+			description: "Maner also spelled Maner or Maner Sharif, is a satellite landmark in Patna Metropolitan Region, in the Patna district in the Indian state of Bihar. Maner Sharif lies 24 km west of Patna the capital of Bihar on National Highway 30.",
+		}]
+	}, {
+		name: "Gaya",
+		description: "Gaya is a holy city beside the Falgu River, in the northeast Indian state of Bihar. It\'s known for 18th-century Vishnupad Mandir, a riverside temple with an octagonal shrine. Close by, ancient Mangla Gauri Temple is set on a hilltop. ",
+		landmarks: [{
+			name: "Bakraur",
+			description: "Bakraur, sometimes called Bakrour, is a village located slightly east of Bodh Gaya in the state of Bihar, India. It lies directly across the Phalgu River from the landmark of Bodh Gaya, where Gautama Buddha is said to have attained enlightenment.",
+		}, {
+			name: "Barachatti",
+			description: "Barachatti is a block in the Gaya district of Bihar, India. Barachatti contains 141 villages and 13 gram panchayat. Sarwan bazar is the biggest and Nimi is the smallest village of Barachatti. The total population in Barachatti sub-district is 142,534 according to the census during 2011 by Indian Government.",
+		}]
+	}, {
+		name: "Darbhanga",
+		description: "Darbhanga is a city and Municipal Corporation in the Indian state of Bihar. It is the 6th largest city of Bihar, only after Patna, Gaya, Bhagalpur, Muzaffarpur and Purnea. It is the headquarters of Darbhanga district and Darbhanga division and was the seat of the Raj Darbhanga and capital of the Mithila region.",
+		landmarks: [{
+			name: "Singhwara",
+			description: "Famous for its Groundnut Market",
+		}, {
+			name: "Jale",
+			description: "Famous for its roasted seads market.",
+		}]
+	}]
 }
 ];
 
@@ -113,7 +147,7 @@ const App = () => {
 	const [landmark, setLandmark] = useState("")
 	const [cities, setCities] = useState([])
 	const [landmarks, setLandmarks] = useState([])
-    
+
 	useEffect(() => {
 		let arr = states.find(item => item.name === state)?.city
 		setCities(arr)
@@ -123,21 +157,21 @@ const App = () => {
 		let brr = cities.find(item => item.name === city)?.landmarks
 		setLandmarks(brr)
 	}, [city])
-    
-    function handleChange(e){
-		if(e.target.id === "state"){
+
+	function handleChange(e) {
+		if (e.target.id === "state") {
 			setState(e.target.value)
 			setCity("")
 			setCities([])
 			setLandmark("")
 			setLandmarks([])
 		}
-		if(e.target.id === "city"){
+		if (e.target.id === "city") {
 			setCity(e.target.value)
 			setLandmark("")
 			setLandmarks([])
 		}
-		if(e.target.id === "landmark"){
+		if (e.target.id === "landmark") {
 			setLandmark(e.target.value)
 		}
 	}
@@ -145,7 +179,6 @@ const App = () => {
 	return (
 		<div id="main">
 			<select id="state" onChange={handleChange} >
-				<option>Select State</option>
 				{states.map((state, ind) => {
 					return (
 						<option key={ind} value={state.name}>{state.name}</option>
@@ -169,8 +202,8 @@ const App = () => {
 				})}
 			</select>
 			{state && <State name={state} description={states.find(item => item.name === state)?.description} />}
-			{city && <City name={city} description={cities.find(item => item.name === city)?.description} /> }
-			{landmark && <Landmark name={landmark} description={landmarks.find(item => item.name === landmark)?.description} /> }
+			{city && <City name={city} description={cities.find(item => item.name === city)?.description} />}
+			{landmark && <Landmark name={landmark} description={landmarks.find(item => item.name === landmark)?.description} />}
 		</div>
 	)
 }
@@ -179,37 +212,3 @@ const App = () => {
 export default App;
 
 
-// {
-// 	name: "Bihar",
-// 	description: "Bihar is a state in East India, bordering Nepal. It is divided by the River Ganges, which floods its fertile plains. Important Buddhist pilgrimage sites include the Bodhi Tree in Bodhgaya's Mahabodhi Temple, under which the Buddha allegedly meditated.",
-// 	city: [{
-// 		name: "Patna",
-// 		description: "Patna is an ancient city that sprawls along the south bank of the Ganges River in Bihar, northeast India.",
-// 		landmarks: [{
-// 			name: "Sonpur",
-// 			description: "Sonpur is a city and sub-division in the Indian state of Bihar, situated on the banks of the River Gandak and Ganges River in the Saran District.",
-// 		}, {
-// 			name: "Maner",
-// 			description: "Maner also spelled Maner or Maner Sharif, is a satellite landmark in Patna Metropolitan Region, in the Patna district in the Indian state of Bihar. Maner Sharif lies 24 km west of Patna the capital of Bihar on National Highway 30.",
-// 		}]
-// 	}, {
-// 		name: "Gaya",
-// 		description: "Gaya is a holy city beside the Falgu River, in the northeast Indian state of Bihar. It\'s known for 18th-century Vishnupad Mandir, a riverside temple with an octagonal shrine. Close by, ancient Mangla Gauri Temple is set on a hilltop. ",
-// 		landmarks: [{
-// 			name: "Bakraur",
-// 			description: "Bakraur, sometimes called Bakrour, is a village located slightly east of Bodh Gaya in the state of Bihar, India. It lies directly across the Phalgu River from the landmark of Bodh Gaya, where Gautama Buddha is said to have attained enlightenment.",
-// 		}, {
-// 			name: "Barachatti",
-// 			description: "Barachatti is a block in the Gaya district of Bihar, India. Barachatti contains 141 villages and 13 gram panchayat. Sarwan bazar is the biggest and Nimi is the smallest village of Barachatti. The total population in Barachatti sub-district is 142,534 according to the census during 2011 by Indian Government.",
-// 		}]
-// 	}, {
-// 		name: "Darbhanga",
-// 		description: "Darbhanga is a city and Municipal Corporation in the Indian state of Bihar. It is the 6th largest city of Bihar, only after Patna, Gaya, Bhagalpur, Muzaffarpur and Purnea. It is the headquarters of Darbhanga district and Darbhanga division and was the seat of the Raj Darbhanga and capital of the Mithila region.",
-// 		landmarks: [{
-// 			name: "Singhwara",
-// 			description: "Famous for its Groundnut Market",
-// 		}, {
-// 			name: "Jale",
-// 			description: "Famous for its roasted seads market.",
-// 		}]
-// 	}]}
